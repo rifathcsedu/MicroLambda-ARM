@@ -68,7 +68,7 @@ Output will be like this:
 
 You will also see the password if you scroll up the terminal.
 
-## Deploy your first serverless function:
+## Deploy first serverless function:
 
 Raspberry Pi uses ARM architecture which is different from other PC (In general, other PC uses x86_64 architecture). So, when you create a function in Node or Python you need to add a suffix of -armhf to use a special Docker image for the Raspberry Pi. Run this command inside of faas folder which we just cloned from GitHub.
 
@@ -92,3 +92,22 @@ Then deploy the function:
 After that, you can login to the http://10.200.10.56:8080/ ID: admin and password: the password you got when you installed openfaas. The deployed function will take some time to show the invoke button because it creates replica with worker nodes. You can check it using the command.
 
       watch 'docker service ls'
+
+
+## Deploy MicroLambda:
+
+Run this command inside of faas folder which we just cloned from GitHub.
+
+      faas-cli build -f ./face-recognition.yml
+
+Then deploy the function:
+
+      faas-cli deploy -f ./face-recognition.yml
+
+
+Initially you need a Redis Database remotely. Configure a Redis Remote Database using https://www.digitalocean.com/community/questions/enable-remote-redis-connection. We use a RaspberryPi Device for Redis Database. We need a Redis Controller and we use another device for this operation. Now staring the Redis Controller, paste the serverless URL in this shortlambda_face.txt file and then Run this command to start Redis Controller.
+
+      python Redis_Controller_face.py
+
+For User, you can use any device. Just run the command:
+      python User_face.py
