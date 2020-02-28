@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://10.200.10.56:8080
+functions:
+  face-recognition:
+    lang: python-armhf
+    handler: ./face-recognition
+    image: face-recognition:latest
+    environment:
+        read_timeout: 200s
+        write_timeout: 200s

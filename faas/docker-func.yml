@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://10.200.10.56:8080
+functions:
+  docker-func:
+    lang: dockerfile
+    handler: ./docker-func
+    image: docker-func:latest
+    environment:
+        read_timeout: 20s
+        write_timeout: 20s
